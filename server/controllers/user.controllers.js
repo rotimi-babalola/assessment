@@ -1,4 +1,5 @@
-import { User } from '../models';
+import _ from 'lodash';
+import { User, Order } from '../models';
 import signToken from '../utils/signToken';
 import verifyPassword from '../utils/verifyPassword';
 
@@ -79,6 +80,29 @@ class UserController {
           });
         }).catch(error => response.status(500).send(error));
       }).catch(error => response.status(500).send(error));
+  }
+
+  static list(request, response) {
+    User.findAll({
+      include: [{
+        model: Order,
+        as: 'orders',
+      }],
+    }).then(users => {
+      const fields = ['_id',
+        'name',
+        'email',
+        'role',
+        'isDeleted',
+        'createdAt',
+        'updateAt',
+        'orders'];
+      const picked = _.map(users, _.partialRight(_.pick, fields));
+      return response.status(200).send({
+        message: 'Users',
+        user: picked,
+      });
+    }).catch(error => response.status(500).send(error));
   }
 }
 

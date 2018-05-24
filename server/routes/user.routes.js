@@ -5,6 +5,7 @@ import Middleware from '../middleware/middleware';
 const router = express.Router();
 
 router.route('/')
+  .get(Middleware.decodeToken, Middleware.verifyAdmin, UserController.list)
   .post(UserController.create);
 
 router.route('/:userId')
