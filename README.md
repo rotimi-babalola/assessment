@@ -1,4 +1,4 @@
-Steps to installing the application
+## Steps to installing the application
 
 Before installing make sure you have Postgres installed on your machine. Also you should have a client you can use to interact with the DB e.g. Postico or pgAdmin.
 
