@@ -2,6 +2,7 @@ import express from 'express';
 import logger from 'morgan';
 
 import userRoutes from './server/routes/user.routes';
+import foodRoutes from './server/routes/food.routes';
 
 const app = express();
 
@@ -15,6 +16,7 @@ app.use(logger('dev'));
 
 // setup routes here
 app.use('/api/v1/users', userRoutes);
+app.use('/api/v1/food', foodRoutes);
 
 app.all('*', (request, response) => response.send({
   message: 'Welcome to the API!!!!',
