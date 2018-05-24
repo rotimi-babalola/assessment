@@ -13,12 +13,21 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       defaultValue: false,
     },
+    foodId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
   }, {});
   Order.associate = function (models) {
     // associations can be defined here
     Order.belongsTo(models.User, {
       foreignKey: 'userId',
       onDelete: 'CASCADE',
+    });
+
+    Order.belongsTo(models.Food, {
+      foreignKey: 'foodId',
+      as: 'food',
     });
   };
   return Order;
