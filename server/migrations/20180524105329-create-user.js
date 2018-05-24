@@ -33,6 +33,10 @@ module.exports = {
         type: Sequelize.ENUM('User', 'Admin'),
         defaultValue: 'User',
       },
+      isDeleted: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE,
