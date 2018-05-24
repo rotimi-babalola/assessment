@@ -8,4 +8,8 @@ router.route('/')
   .get(Middleware.decodeToken, OrderController.getOrders)
   .post(Middleware.decodeToken, OrderController.create);
 
+router.route('/:orderId')
+  .put(Middleware.decodeToken, OrderController.updateOrder)
+  .delete(Middleware.decodeToken, OrderController.cancelOrder);
+
 export default router;
