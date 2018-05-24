@@ -5,13 +5,14 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
     },
     price: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
     description: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
     },
   }, {});
   Food.associate = function (models) {
