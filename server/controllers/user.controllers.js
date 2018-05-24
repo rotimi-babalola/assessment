@@ -22,6 +22,7 @@ class UserController {
       .catch(error => response.status(500).send(error));
   }
 
+  // sigin
   static signin(request, response) {
     User.findOne({
       where: {
@@ -53,6 +54,31 @@ class UserController {
         },
       });
     }).catch(error => response.status(500).send(error));
+  }
+
+  static softDelete(request, response) {
+    User.findById(request.params.userId)
+      .then((foundUser) => {
+        if (!foundUser) {
+          return response.status(404).send({
+            success: false,
+            message: 'User not found!',
+          });
+        } else if (foundUser.isDeleted) {
+          return response.status(400).send({
+            success: false,
+            message: 'User can not be undeleted once deleted',
+          });
+        }
+        foundUser.update({
+          isDeleted: true,
+        }).then(() => {
+          return response.status(200).send({
+            success: true,
+            message: 'User has been deleted',
+          });
+        }).catch(error => response.status(500).send(error));
+      }).catch(error => response.status(500).send(error));
   }
 }
 

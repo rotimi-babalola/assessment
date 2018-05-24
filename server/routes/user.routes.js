@@ -6,6 +6,9 @@ const router = express.Router();
 router.route('/')
   .post(UserController.create);
 
+router.route('/:userId')
+  .delete(UserController.softDelete);
+
 router.route('/signin')
   .post(UserController.signin);
 

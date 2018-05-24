@@ -28,6 +28,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.ENUM('User', 'Admin'),
       defaultValue: 'User',
     },
+    isDeleted: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   }, {
       hooks: {
         beforeCreate: (user) => {
