@@ -12,9 +12,13 @@ module.exports = {
       name: {
         type: Sequelize.STRING,
       },
-      isCompleted: {
+      status: {
         type: Sequelize.ENUM('Created', 'Pending', 'Delivered'),
         defaultValue: 'Created',
+      },
+      isCancelled: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
       },
       createdAt: {
         allowNull: false,
