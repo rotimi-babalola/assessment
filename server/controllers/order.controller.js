@@ -28,7 +28,7 @@ class OrderController {
     }).catch(error => response.status(500).send(error));
   }
 
-  static updateOrder(request, response) {
+  static updateOrderStatus(request, response) {
     Order.find({
       where: {
         id: request.params.orderId,
@@ -44,7 +44,7 @@ class OrderController {
         }
 
         orderToUpdate.update({
-          foodId: request.body.foodId || orderToUpdate.foodId,
+          status: request.body.status || orderToUpdate.status,
         }).then(() => {
           return response.status(200).send({
             success: true,
@@ -61,17 +61,24 @@ class OrderController {
         id: request.params.orderId,
         userId: request.decoded.userId,
       },
-    }).then((orderToDelete) => {
-      if (!orderToDelete) {
+    }).then((orderToCancel) => {
+      if (!orderToCancel) {
         return response.status(404).send({
           success: false,
           message: 'Order not found',
         });
+      } else if (orderToCancel.isCancelled) {
+        return response.status(400).send({
+          success: false,
+          message: 'Order has already been cancelled',
+        });
       }
-      orderToDelete.destroy().then(() => {
+      orderToCancel.update({
+        isCancelled: true,
+      }).then(() => {
         return response.status(200).send({
           success: true,
-          message: 'Order has been deleted',
+          message: 'Order has been cancelled',
         });
       }).catch(error => response.status(500).send(error));
     }).catch(error => response.status(500).send(error));

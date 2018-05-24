@@ -9,7 +9,7 @@ router.route('/')
   .post(Middleware.decodeToken, OrderController.create);
 
 router.route('/:orderId')
-  .put(Middleware.decodeToken, OrderController.updateOrder)
+  .put(Middleware.decodeToken, Middleware.verifyAdmin, OrderController.updateOrderStatus)
   .delete(Middleware.decodeToken, OrderController.cancelOrder);
 
 export default router;

@@ -5,9 +5,13 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
     },
-    isCompleted: {
+    status: {
       type: DataTypes.ENUM('Created', 'Pending', 'Delivered'),
       defaultValue: 'Created',
+    },
+    isCancelled: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
     },
   }, {});
   Order.associate = function (models) {
