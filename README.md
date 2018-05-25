@@ -21,3 +21,13 @@ If all went well you should the following message:
 ```
 Server is live on port 5000
 ```
+
+5. Create the database
+```
+createdb DB_NAME
+```
+
+6. Run migrations
+```
+sequelize db:migrate
+```
